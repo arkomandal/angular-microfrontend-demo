@@ -9,10 +9,13 @@
     "start:child2": "ng run child2:serve --port=4400",
     "start:all": "concurrently \"npm run start:host\" \"npm run start:child1\" \"npm run start:child2\"",
     "build": "ng build",
+    "build:child1": "ng run child1:build",
+    "build:child2": "ng run child2:build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:angular-microfrontend-demo": "node dist/angular-microfrontend-demo/server/server.mjs",
-    "serve:ssr:child1": "node dist/child1/server/server.mjs"
+    "serve:ssr:child1": "node dist/child1/server/server.mjs",
+    "serve:ssr:child2": "node dist/child2/server/server.mjs"
   },
   "prettier": {
     "printWidth": 100,

@@ -1,11 +1,19 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  template: `
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+    <!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+    <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+    <!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+    <!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
+    <!-- * * * * * * * to get started with your project! * * * * * * * -->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+    <h2>Child 1 App Loaded Remotely!</h2>
+  `,
+  styles: [``]
 })
 export class App {
   protected readonly title = signal('child1');

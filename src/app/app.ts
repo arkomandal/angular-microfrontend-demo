@@ -1,27 +1,32 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, Type } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NgIf } from '@angular/common';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { NgIf, NgComponentOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgIf],
+  imports: [RouterOutlet, NgIf, NgComponentOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
   protected readonly title = signal('angular-microfrontend-demo');
 
-  // holds the sanitized URL for the iframe container
-  iframeUrl: SafeResourceUrl | null = null;
+  // holds a dynamically loaded component from a remote
+  remoteComp: Type<any> | null = null;
 
-  constructor(private sanitizer: DomSanitizer) {}
-
-  openChild(url: string) {
-    this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  async openChild(name: 'child1' | 'child2') {
+    try {
+      // Vite can't statically analyze a template string import; ignore the warning
+      // https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars
+      // The remote name is constrained to 'child1' or 'child2', so this is safe.
+      const m = await import(/* @vite-ignore */ `${name}/Component`);
+      this.remoteComp = m.App;
+    } catch (e) {
+      console.error('failed to load remote', e);
+    }
   }
 
   close() {
-    this.iframeUrl = null;
+    this.remoteComp = null;
   }
 }

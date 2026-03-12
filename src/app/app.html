@@ -23,7 +23,6 @@
   display: flex;
   flex-direction: column;
 }
-.child-iframe { flex: 1; border: none; }
 .close-button {
   align-self: flex-end;
   background: transparent;
@@ -37,17 +36,17 @@
 <main class="main">
   <h1>Micro‑frontend Dashboard</h1>
   <div class="dashboard">
-    <div class="card" (click)="openChild('http://localhost:4300')">
+    <div class="card" (click)="openChild('child1')">
       Child 1
     </div>
-    <div class="card" (click)="openChild('http://localhost:4400')">
+    <div class="card" (click)="openChild('child2')">
       Child 2
     </div>
   </div>
 
-  <div class="child-window" *ngIf="iframeUrl">
+  <div class="child-window" *ngIf="remoteComp">
     <button class="close-button" (click)="close()">×</button>
-    <iframe [src]="iframeUrl" class="child-iframe"></iframe>
+    <ng-container *ngComponentOutlet="remoteComp"></ng-container>
   </div>
 </main>
 
