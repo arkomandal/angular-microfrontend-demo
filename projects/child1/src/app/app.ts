@@ -1,3 +1,4 @@
+export { App };
 import { Component, signal } from '@angular/core';
 
 @Component({
